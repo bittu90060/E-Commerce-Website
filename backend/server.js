@@ -7,9 +7,20 @@ const cors = require("cors");
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://e-commerce-website-1-0bbs.onrender.com",
+];
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`CORS blocked origin: ${origin}`));
+    },
   })
 );
 
@@ -48,11 +59,10 @@ const PORT = process.env.PORT || 5000;
 async function startServer() {
   try {
     if (!process.env.MONGO_URI || !process.env.JWT_SECRET) {
-      throw new Error("MONGO_URI or JWT_SECRET is missing in backend/.env");
+      throw new Error("MONGO_URI or JWT_SECRET is missing");
     }
 
     await mongoose.connect(process.env.MONGO_URI);
-
     console.log("MongoDB connected successfully");
 
     app.listen(PORT, () => {
