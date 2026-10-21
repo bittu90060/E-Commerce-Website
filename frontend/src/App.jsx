@@ -38,62 +38,62 @@ function readStorage(key, fallback) {
   }
 }
 
-const demoProducts = [
-  {
-    _id: "demo-1",
-    name: "Everyday Backpack",
-    category: "Accessories",
-    price: 1299,
-    stock: 12,
-    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800",
-    description: "A lightweight everyday backpack.",
-  },
-  {
-    _id: "demo-2",
-    name: "Wireless Headphones",
-    category: "Electronics",
-    price: 2499,
-    stock: 8,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800",
-    description: "Comfortable headphones for work and travel.",
-  },
-  {
-    _id: "demo-3",
-    name: "Classic Watch",
-    category: "Accessories",
-    price: 1899,
-    stock: 10,
-    image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800",
-    description: "A clean, classic everyday watch.",
-  },
-  {
-    _id: "demo-4",
-    name: "Running Sneakers",
-    category: "Fashion",
-    price: 2999,
-    stock: 6,
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800",
-    description: "Lightweight sneakers for active days.",
-  },
-  {
-    _id: "demo-5",
-    name: "Ceramic Coffee Mug",
-    category: "Home",
-    price: 399,
-    stock: 20,
-    image: "https://images.unsplash.com/photo-1514228742587-6b1558f9f933?w=800",
-    description: "A simple mug for your daily coffee.",
-  },
-  {
-    _id: "demo-6",
-    name: "Desk Lamp",
-    category: "Home",
-    price: 999,
-    stock: 9,
-    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800",
-    description: "Warm light for your desk or bedside.",
-  },
-];
+// const demoProducts = [
+//   {
+//     _id: "demo-1",
+//     name: "Everyday Backpack",
+//     category: "Accessories",
+//     price: 1299,
+//     stock: 12,
+//     image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800",
+//     description: "A lightweight everyday backpack.",
+//   },
+//   {
+//     _id: "demo-2",
+//     name: "Wireless Headphones",
+//     category: "Electronics",
+//     price: 2499,
+//     stock: 8,
+//     image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800",
+//     description: "Comfortable headphones for work and travel.",
+//   },
+//   {
+//     _id: "demo-3",
+//     name: "Classic Watch",
+//     category: "Accessories",
+//     price: 1899,
+//     stock: 10,
+//     image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800",
+//     description: "A clean, classic everyday watch.",
+//   },
+//   {
+//     _id: "demo-4",
+//     name: "Running Sneakers",
+//     category: "Fashion",
+//     price: 2999,
+//     stock: 6,
+//     image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800",
+//     description: "Lightweight sneakers for active days.",
+//   },
+//   {
+//     _id: "demo-5",
+//     name: "Ceramic Coffee Mug",
+//     category: "Home",
+//     price: 399,
+//     stock: 20,
+//     image: "https://images.unsplash.com/photo-1514228742587-6b1558f9f933?w=800",
+//     description: "A simple mug for your daily coffee.",
+//   },
+//   {
+//     _id: "demo-6",
+//     name: "Desk Lamp",
+//     category: "Home",
+//     price: 999,
+//     stock: 9,
+//     image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800",
+//     description: "Warm light for your desk or bedside.",
+//   },
+// ];
 
 export default function App() {
   const [products, setProducts] = useState([]);
