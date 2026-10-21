@@ -1,6 +1,6 @@
 # 🛍️ ShopEase – E-Commerce Website
 
-ShopEase is a full-stack e-commerce web application built using the MERN stack. Users can browse products, add items to their cart, sign in, and place orders.
+ShopEase is a full-stack e-commerce web application built using the MERN stack. Users can browse products, add items to their cart, sign in, and place orders. Admins can manage products through admin-only functionality.
 
 ## 🌐 Live Demo
 
@@ -10,17 +10,26 @@ ShopEase is a full-stack e-commerce web application built using the MERN stack. 
 
 ## ✨ Features
 
-- 🛒 Browse products and view product details
-- 🔍 Product categories, prices, and stock information
-- 🛍️ Shopping cart with quantity controls
-- 🔐 User registration and login
-- 📦 Place orders after authentication
-- 📋 View order history
-- 👨‍💼 Admin product management
-- 🖼️ Product image uploads using Cloudinary
-- 🗄️ MongoDB database integration
-- 📱 Responsive user interface
-- 🚀 Deployment using Render
+### 🛒 Customer Features
+- Browse products and view product details
+- View product prices and stock availability
+- Add products to the shopping cart
+- Increase or decrease product quantities
+- User registration and login
+- Place orders after authentication
+- View order history, if implemented
+- Responsive user interface
+
+### 👨‍💼 Admin Features
+- Secure admin login with role-based access
+- Admin dashboard for product management
+- **Add new products**
+- Enter product name and description
+- Set product price and category
+- Add stock quantity
+- Upload product images using Cloudinary
+- Save product information in MongoDB
+- Update or delete products, if implemented in the admin interface
 
 ## 💻 Tech Stack
 
@@ -47,35 +56,31 @@ ShopEase is a full-stack e-commerce web application built using the MERN stack. 
 E-Commerce-Website/
 ├── backend/
 │   ├── server.js
+│   ├── package.json
 │   └── src/
 │       ├── config/
 │       ├── middleware/
 │       ├── models/
 │       └── routes/
-│
-└── frontend/
-    ├── src/
-    │   ├── App.jsx
-    │   └── main.jsx
-    ├── package.json
-    └── vite.config.js
+├── frontend/
+│   ├── src/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── package.json
+│   └── vite.config.js
+└── README.md
 ```
 
 ## ⚙️ Installation and Setup
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/bittu90060/E-Commerce-Website.git
-```
-
-### 2. Open the project
-
-```bash
 cd E-Commerce-Website
 ```
 
-### 3. Setup the backend
+### 2. Install Backend Dependencies
 
 ```bash
 cd backend
@@ -91,24 +96,30 @@ JWT_SECRET=your_strong_random_secret
 FRONTEND_URL=http://localhost:5173
 ```
 
-Add any required Cloudinary environment variables using the names expected by your backend configuration.
+Add the required Cloudinary environment variables if your backend uses image uploads.
 
-Start the backend using the script configured in `backend/package.json`. If the project has a development script, run:
+Start the backend using the script configured in `backend/package.json`. For example:
 
 ```bash
 npm run dev
 ```
 
-### 4. Setup the frontend
+If no development script exists, use the configured start command, such as:
 
-Open another terminal:
+```bash
+node server.js
+```
+
+### 3. Install Frontend Dependencies
+
+Open a new terminal from the project root:
 
 ```bash
 cd frontend
 npm install
 ```
 
-Create a `.env` file inside the `frontend` folder, not inside `frontend/src/`:
+Create a `.env` file inside the `frontend` folder:
 
 ```env
 VITE_API_URL=http://localhost:5000/api
@@ -120,67 +131,86 @@ Start the frontend:
 npm run dev
 ```
 
-Open the local URL displayed by Vite, usually:
+Open the local URL shown by Vite, usually:
 
 http://localhost:5173
+
+## ➕ Admin: Add a Product
+
+1. Sign in using an account with the `admin` role.
+2. Open the admin product-management page.
+3. Enter the product details in the form.
+4. Add the product name, description, price, category, stock quantity, and image as supported by the form.
+5. Submit the product form.
+6. The backend should validate the request and save the product to MongoDB.
+7. Check the product list to confirm the product appears.
+
+**Important:** Adding a product requires a working frontend form, backend product-creation route, admin authorization, and database connection.
 
 ## 🔗 API Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
-| GET | `/` | Check backend status |
-| GET | `/api/products` | Get products |
-| — | `/api/auth` | Authentication routes |
-| — | `/api/orders` | Order management routes |
-| — | `/api/uploads` | Image upload routes |
+| GET | `/` | Backend health check |
+| GET | `/api/products` | Retrieve products |
+| `/api/auth` | Authentication routes | Registration and login |
+| `/api/orders` | Order routes | Order management |
+| `/api/uploads` | Upload routes | Image uploads |
 
-Authentication may be required for protected order and admin routes.
+The exact methods and protected routes depend on the backend route implementation.
 
-## 🚀 Deployment
-
-The project is deployed using Render.
+## 🚀 Deployment on Render
 
 ### Backend Environment Variables
 
-Configure these in your Render backend service:
+Configure these in the Render backend service:
 
 - `MONGO_URI`
 - `JWT_SECRET`
 - `FRONTEND_URL`
-- Required Cloudinary variables
+- Required Cloudinary environment variables
 
 ### Frontend Environment Variable
 
-Configure this in your Render frontend Static Site:
+Configure this in the Render frontend Static Site:
 
 ```env
 VITE_API_URL=https://e-commerce-website-lz7y.onrender.com/api
 ```
 
-After changing environment variables, redeploy the frontend so the new configuration is included in the build.
+For a typical Vite deployment, use:
+
+- **Build Command:** `npm install && npm run build`
+- **Publish Directory:** `dist`
+
+Ensure the backend CORS configuration allows the exact deployed frontend URL.
+
+After changing frontend environment variables, redeploy the frontend.
 
 ## 🛠️ Troubleshooting
 
-- **Preview products appear:** Check the frontend API URL and confirm the deployed frontend is using the backend API.
-- **CORS error:** Allow the exact frontend URL in the backend CORS configuration.
-- **Login required:** Sign in before calling protected order endpoints.
-- **Order not working:** Check browser console errors, backend logs, product IDs, stock, and authentication.
-- **Changes not visible:** Commit and push your code to GitHub, then deploy the latest commit on Render.
+- **Preview products appear:** Check `VITE_API_URL` and verify that the products API returns database products.
+- **CORS error:** Allow the exact frontend URL in backend CORS settings.
+- **Login fails:** Check the API URL, credentials, and authentication route.
+- **Admin cannot add products:** Verify the admin role, authentication token, product-creation API, and MongoDB connection.
+- **Orders fail:** Check authentication, product IDs, stock availability, browser console errors, and backend logs.
+- **GitHub changes do not appear:** Check Git status, commit the changes, push to `main`, and verify the latest commit.
 
 ## 🔒 Security
 
-- Never upload `.env` files or secrets to GitHub.
-- Keep database credentials and API secrets private.
+- Never upload `.env` files or credentials to GitHub.
+- Keep MongoDB and Cloudinary credentials private.
 - Use a strong, unique JWT secret.
 - Rotate credentials if they have been exposed.
+- Enforce admin authorization on the backend.
 
 ## 👨‍💻 Author
 
 **Bittu Kumar**
 
-- GitHub: https://github.com/bittu90060
-- Repository: https://github.com/bittu90060/E-Commerce-Website
-- Live Project: https://e-commerce-website-1-0bbs.onrender.com/
+- **GitHub:** https://github.com/bittu90060
+- **Repository:** https://github.com/bittu90060/E-Commerce-Website
+- **Live Project:** https://e-commerce-website-1-0bbs.onrender.com/
 
 ---
 
